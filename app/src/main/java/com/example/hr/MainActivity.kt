@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
 
         // Splash Screen
         Handler().postDelayed({
-            val intent = Intent(this@MainActivity, LoginActivity::class.java)
+            val intent = Intent(this@MainActivity, OnBoard1Activity::class.java)
             startActivity(intent)
         }, 3000 )
     }
