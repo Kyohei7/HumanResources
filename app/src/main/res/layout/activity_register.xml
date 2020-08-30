@@ -88,7 +88,7 @@
         android:layout_height="42dp"
         android:background="@drawable/roundedcorner1"
         android:fontFamily="@font/roboto_light"
-        android:text="SUBMIT"
+        android:text="Create Account"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
