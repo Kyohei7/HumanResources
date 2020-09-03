@@ -5,7 +5,7 @@
     android:background="@drawable/ic_onboard_screen_1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".OnBoard1Activity">
+    tools:context=".onboard.OnBoard1Activity">
 
     <Button
         android:id="@+id/btn_onboard1"

@@ -1,10 +1,9 @@
 package com.example.hr
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import androidx.core.content.ContextCompat.startActivity
+import com.example.hr.onboard.OnBoard1Activity
 
 class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

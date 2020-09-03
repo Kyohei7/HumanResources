@@ -1,9 +1,11 @@
-package com.example.hr
+package com.example.hr.onboard
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import com.example.hr.R
+import com.example.hr.register.RegisterActivity
 
 class OnBoard3Activity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

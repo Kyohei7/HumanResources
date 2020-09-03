@@ -7,22 +7,22 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.hr.HomeFragment"
+        android:name="com.example.hr.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/projectsFragment"
-        android:name="com.example.hr.ProjectsFragment"
+        android:name="com.example.hr.projects.ProjectsFragment"
         android:label="fragment_projects"
         tools:layout="@layout/fragment_projects" />
     <fragment
         android:id="@+id/offersFragment"
-        android:name="com.example.hr.OffersFragment"
+        android:name="com.example.hr.offers.OffersFragment"
         android:label="fragment_offers"
         tools:layout="@layout/fragment_offers" />
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.hr.ProfileFragment"
+        android:name="com.example.hr.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
 </navigation>

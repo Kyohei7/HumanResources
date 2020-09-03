@@ -1,10 +1,11 @@
-package com.example.hr
+package com.example.hr.register
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import kotlinx.android.synthetic.main.activity_register.*
+import com.example.hr.login.LoginActivity
+import com.example.hr.R
 
 class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
