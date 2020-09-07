@@ -5,21 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/ic_onboard_screen_2"
-    tools:context=".onboard.OnBoard2Activity">
+    tools:context=".onboard.screens.FirstScreen">
 
-    <Button
-        android:id="@+id/btn_onboard2"
-        android:layout_width="70dp"
-        android:layout_height="42dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/roundedcorner1"
-        android:fontFamily="@font/roboto_light"
+    <TextView
+        android:id="@+id/next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
         android:text="Next"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/colorText"
+        android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.956" />
+        app:layout_constraintHorizontal_bias="0.932"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
