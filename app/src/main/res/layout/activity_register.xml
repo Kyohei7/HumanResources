@@ -35,14 +35,15 @@
         app:layout_constraintVertical_bias="0.356" />
 
     <EditText
-        android:id="@+id/editText4"
-        android:layout_width="232dp"
-        android:layout_height="35dp"
+        android:id="@+id/et_signup_username"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
         android:background="@drawable/roundedcorner"
         android:fontFamily="@font/roboto_thin_italic"
-        android:hint="     Username"
+        android:hint="Username"
+        android:paddingLeft="16dp"
         android:inputType="text"
-        android:textSize="10dp"
+        android:textSize="13dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
@@ -51,41 +52,43 @@
         app:layout_constraintVertical_bias="0.134" />
 
     <EditText
-        android:id="@+id/editText5"
-        android:layout_width="232dp"
-        android:layout_height="35dp"
+        android:id="@+id/et_signup_email"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
         android:background="@drawable/roundedcorner"
         android:fontFamily="@font/roboto_thin_italic"
-        android:hint="     Email"
+        android:hint="Email"
+        android:paddingLeft="16dp"
         android:inputType="textEmailAddress"
-        android:textSize="10dp"
+        android:textSize="13dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText4"
+        app:layout_constraintTop_toBottomOf="@+id/et_signup_username"
         app:layout_constraintVertical_bias="0.074" />
 
     <EditText
-        android:id="@+id/editText6"
-        android:layout_width="232dp"
-        android:layout_height="35dp"
+        android:id="@+id/et_signup_password"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
         android:background="@drawable/roundedcorner"
         android:fontFamily="@font/roboto_thin_italic"
-        android:hint="     Password"
+        android:hint="Password"
+        android:paddingLeft="16dp"
         android:inputType="textPassword"
-        android:textSize="10dp"
+        android:textSize="13dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText5"
+        app:layout_constraintTop_toBottomOf="@+id/et_signup_email"
         app:layout_constraintVertical_bias="0.085" />
 
     <Button
         android:id="@+id/btn_register"
-        android:layout_width="228dp"
-        android:layout_height="42dp"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
         android:background="@drawable/roundedcorner1"
         android:fontFamily="@font/roboto_light"
         android:text="Create Account"
@@ -94,7 +97,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText6"
+        app:layout_constraintTop_toBottomOf="@+id/et_signup_password"
         app:layout_constraintVertical_bias="0.277" />
 
 
