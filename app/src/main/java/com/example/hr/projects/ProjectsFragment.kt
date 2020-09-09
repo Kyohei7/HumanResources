@@ -12,14 +12,32 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hr.R
+import com.example.hr.recyclerview.ListProjectAdapter
+import com.example.hr.recyclerview.Project
+import com.example.hr.recyclerview.ProjectsData
 import kotlinx.android.synthetic.main.fragment_projects.*
 
 class ProjectsFragment : Fragment() {
 
+    private lateinit var rvProjects: RecyclerView
+    private var list: ArrayList<Project> = arrayListOf()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.fragment_projects, container, false)
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val rootView = inflater.inflate(R.layout.fragment_projects, container, false)
+
+        rvProjects = rootView.findViewById(R.id.rv_project) as RecyclerView
+        rvProjects.setHasFixedSize(true)
+
+        list.addAll(ProjectsData.listData)
+        RecyclerViewList()
+        return rootView
+    }
+
+    private fun RecyclerViewList() {
+        rvProjects.layoutManager = LinearLayoutManager(activity)
+        val listProjectAdapter = ListProjectAdapter(list)
+        rvProjects.adapter = listProjectAdapter
+    }
 
 }
