@@ -32,4 +32,8 @@ class PreferencesHelper(context: Context) {
     fun getBoolean(key: String): Boolean {
         return sharepreferences.getBoolean(key, false)
     }
+
+    fun logout() {
+        editor.clear().apply()
+    }
 }
