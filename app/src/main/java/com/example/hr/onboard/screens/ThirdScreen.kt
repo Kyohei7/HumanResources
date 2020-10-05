@@ -8,10 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.hr.R
 import com.example.hr.login.LoginActivity
-import com.example.hr.profile.WebViewGithub
 import com.example.hr.register.RegisterActivity
 import kotlinx.android.synthetic.main.fragment_third_screen.*
-import kotlinx.android.synthetic.main.fragment_third_screen.view.*
 
 class ThirdScreen : Fragment() {
 

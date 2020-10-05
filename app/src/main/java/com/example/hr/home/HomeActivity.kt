@@ -1,17 +1,17 @@
 package com.example.hr.home
 
+import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
-import android.widget.Toolbar
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AlertDialog
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
-import com.example.hr.MainActivity
 import com.example.hr.R
 import com.example.hr.helper.PreferencesHelper
 import com.example.hr.login.LoginActivity
@@ -24,7 +24,6 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     lateinit var drawerLayout: DrawerLayout
     lateinit var navigationView: NavigationView
     lateinit var toolbar: androidx.appcompat.widget.Toolbar
-
     lateinit var sharepreferences: PreferencesHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,9 +39,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         setSupportActionBar(toolbar)
 
-        val toggle = ActionBarDrawerToggle(
-            this,drawerLayout,toolbar,0,0
-        )
+        val toggle = ActionBarDrawerToggle(this,drawerLayout,toolbar,0,0)
 
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
@@ -58,10 +55,6 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return true
     }
 
-
-
-
-
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.logout_menu, menu)
         return super.onCreateOptionsMenu(menu)
@@ -74,11 +67,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private fun setMenu(selectedMode: Int) {
         when(selectedMode) {
-            R.id.menu_logout -> {
-                sharepreferences.logout()
-                showMessage("Logout Success!")
-                moveIntent()
-            }
+            R.id.menu_logout -> { dialog() }
         }
     }
 
@@ -86,10 +75,18 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
     }
 
-    private fun moveIntent() {
-        startActivity(Intent(this, LoginActivity::class.java))
-        finish()
+
+    private fun dialog() {
+        val dialog = AlertDialog.Builder(this)
+            .setTitle("Do you want to Logout?")
+            .setPositiveButton("Logout") { dialog: DialogInterface?, which: Int ->
+                sharepreferences.logout()
+                val intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
+                showMessage("Logout Success!")
+            }
+            .setNegativeButton("Cancel") {dialogInterface, i -> dialogInterface.dismiss()
+            }
+        dialog.show()
     }
-
-
 }
