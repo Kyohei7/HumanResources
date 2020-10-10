@@ -14,7 +14,6 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".util.SharePreferenceActivity"></activity>
-        <activity android:name=".auth.SharePreferenceActivity"></activity>
         <activity android:name=".profile.WebViewGithub" />
         <activity android:name=".home.HomeActivity" />
         <activity android:name=".profile.ProfileActivity" />
