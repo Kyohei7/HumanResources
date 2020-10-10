@@ -14,7 +14,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.hr.R
 import com.example.hr.helper.PreferencesHelper
-import com.example.hr.login.LoginActivity
+import com.example.hr.mvvm.LoginActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 

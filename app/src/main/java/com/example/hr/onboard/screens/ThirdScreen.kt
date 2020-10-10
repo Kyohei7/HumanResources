@@ -7,8 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.hr.R
-import com.example.hr.login.LoginActivity
-import com.example.hr.register.RegisterActivity
+import com.example.hr.mvvm.LoginActivity
+import com.example.hr.mvvm.RegisterActivity
 import kotlinx.android.synthetic.main.fragment_third_screen.*
 
 class ThirdScreen : Fragment() {
