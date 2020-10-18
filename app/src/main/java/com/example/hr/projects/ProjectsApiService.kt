@@ -4,7 +4,7 @@ import retrofit2.http.GET
 
 interface ProjectsApiService {
 
-    @GET("projects")
+    @GET("project")
     suspend fun getAllProjectData(): ProjectResponse
 
 

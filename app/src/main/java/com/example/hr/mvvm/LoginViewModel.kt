@@ -50,10 +50,11 @@ class LoginViewModel : ViewModel(), CoroutineScope {
 
             if (response is LoginResponse) {
 
-                if (response.message == "Success to Login") {
-                    // Save Token in Share Preferences
-                    saveSession(response.token.toString())
-
+                if (response.data?.role == "company") {
+                    sharedPreferences.putString(Constant.PREFERENCES_IS_TOKEN, response.data.token)
+                    sharedPreferences.putBoolean(Constant.PREFERENCES_IS_LOGIN, true)
+                    sharedPreferences.putString(Constant.PREFERENCES_ID, response.data.id)
+                    sharedPreferences.putString(Constant.PREFERENCES_IS_USERNAME, response.data.name)
                     isLoginLiveData.value = true
 
                 } else {
@@ -61,9 +62,5 @@ class LoginViewModel : ViewModel(), CoroutineScope {
                 }
             }
         }
-    }
-
-    private fun saveSession(token: String) {
-        sharedPreferences.put(Constant.PREFERENCES_IS_TOKEN, token)
     }
 }

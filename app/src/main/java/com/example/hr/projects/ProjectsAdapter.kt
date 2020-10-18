@@ -33,7 +33,7 @@ class ProjectsAdapter : RecyclerView.Adapter<ProjectsAdapter.ProjectHolder>() {
 
     override fun onBindViewHolder(holder: ProjectHolder, position: Int) {
         val item = items[position]
-        holder.binding.tvNameProject.text = item.name
+        holder.binding.tvNameProject.text = item.name_project
         holder.binding.tvJobDeadline.text = item.deadline
         Picasso.get().load(getPhotoImage(item.photo.toString())).
         into(holder.binding.imgImageProject)

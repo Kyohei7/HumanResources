@@ -5,7 +5,7 @@ import retrofit2.http.GET
 
 interface DevelopersApiService {
 
-    @GET("developers")
+    @GET("developer")
     suspend fun getAllDevelopers(): DevelopersResponse
 
 

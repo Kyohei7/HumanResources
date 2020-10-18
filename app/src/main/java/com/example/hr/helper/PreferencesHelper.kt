@@ -15,7 +15,7 @@ class PreferencesHelper(context: Context) {
         editor              = sharepreferences.edit()
     }
 
-    fun put(key: String, value: String) {
+    fun putString(key: String, value: String) {
         editor.putString(key, value)
             .apply()
     }
@@ -24,7 +24,7 @@ class PreferencesHelper(context: Context) {
         return sharepreferences.getString(key, null)
     }
 
-    fun put(key: String, value: Boolean) {
+    fun putBoolean(key: String, value: Boolean) {
         editor.putBoolean(key, value)
             .apply()
     }

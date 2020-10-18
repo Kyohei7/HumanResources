@@ -55,11 +55,6 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    override fun onDestroy() {
-        if (!sharePreferencesHelper.getBoolean(Constant.PREFERENCES_IS_LOGIN))
-        super.onDestroy()
-    }
-
     private fun subscribeLiveData() {
         viewModel.isLoginLiveData.observe(this, Observer {
             Log.d("android1", "$it")

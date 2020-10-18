@@ -8,7 +8,7 @@ class DevelopersResponse (val success: String?, val message: String?, val data: 
 
         @SerializedName("id")               val id:             String?,
         @SerializedName("photo")            val photo:          String?,
-        @SerializedName("name")             val name:           String?,
+        @SerializedName("name_developer")             val name:           String?,
         @SerializedName("job")              val job:            String?,
         @SerializedName("location")         val location:       String?,
         @SerializedName("status")           val status:         String?,

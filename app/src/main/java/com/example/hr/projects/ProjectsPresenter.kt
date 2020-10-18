@@ -46,7 +46,7 @@ class ProjectsPresenter(private val coroutineScope: CoroutineScope,
                         it.name.orEmpty(),
                         it.description.orEmpty(),
                         it.deadline.orEmpty(),
-                        it.company.orEmpty(),
+                        it.id_company.orEmpty(),
                         it.photo.orEmpty(),
                         it.createAt.orEmpty(),
                         it.updateAt.orEmpty()
