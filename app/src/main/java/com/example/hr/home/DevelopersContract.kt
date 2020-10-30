@@ -1,5 +1,7 @@
 package com.example.hr.home
 
+import com.example.hr.helper.PreferencesHelper
+
 interface DevelopersContract {
 
     interface View {
@@ -16,6 +18,7 @@ interface DevelopersContract {
         fun bindToView(view : View)
         fun unbind()
         fun CallDeveloperApi()
+        fun setSharePref(sharePref: PreferencesHelper)
 
     }
 

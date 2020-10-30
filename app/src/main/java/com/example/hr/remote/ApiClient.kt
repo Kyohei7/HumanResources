@@ -11,7 +11,7 @@ class ApiClient {
 
     companion object {
 
-        private const val BASE_URL = "http://54.160.226.42:5000/"
+        private const val BASE_URL = "http://18.234.106.45:8080/"
         private var retrofit: Retrofit? = null
 
         private fun provideHttpLoggingInterceptor() = run {

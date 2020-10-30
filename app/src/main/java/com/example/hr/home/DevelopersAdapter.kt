@@ -13,7 +13,7 @@ class DevelopersAdapter: RecyclerView.Adapter<DevelopersAdapter.DeveloperHolder>
 
     private val items = mutableListOf<DevelopersModel>()
 
-    private fun getPhotoImage(file: String) : String = "http://54.160.226.42:5000/uploads/$file"
+    private fun getPhotoImage(file: String) : String = "http://18.234.106.45:8080/uploads/$file"
 
     fun addList(list: List<DevelopersModel>) {
         items.clear()

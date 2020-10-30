@@ -1,17 +1,21 @@
 package com.example.hr.home
 
 import android.util.Log
+import com.example.hr.helper.Constant
+import com.example.hr.helper.PreferencesHelper
+import com.example.hr.profile.CompanyByIdUserResponse
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class DevelopersPresenter( private val coroutineScope: CoroutineScope,
-                           private val service: DevelopersApiService?) : DevelopersContract.Presenter {
+                           private val service: DevelopersApiService?,
+                           private var sharePref: PreferencesHelper) : DevelopersContract.Presenter {
 
 
     private var view: DevelopersContract.View? = null
-
+//    private lateinit var sharePref : PreferencesHelper
 
     override fun bindToView(view: DevelopersContract.View) {
         this.view = view
@@ -71,6 +75,27 @@ class DevelopersPresenter( private val coroutineScope: CoroutineScope,
 
             view?.hideProgressBar()
             Log.d("Developer", "finish : ${Thread.currentThread().name}")
+        }
+    }
+
+    override fun setSharePref(sharePref: PreferencesHelper) {
+        this.sharePref = sharePref
+    }
+
+    fun callCompanyId(id : String) {
+        coroutineScope.launch {
+            view?.hideProgressBar()
+            val response = withContext(Dispatchers.IO) {
+                try {
+                    service?.getCompanyId(id)
+                } catch (e: Throwable) {
+                    e.printStackTrace()
+                }
+            }
+            if (response is CompanyByIdUserResponse) {
+                sharePref.putString(Constant.PREFERENCE_IS_ID_COMPANY, response.data.idCompany.toString())
+                Log.d("android1", "$response")
+            }
         }
     }
 }

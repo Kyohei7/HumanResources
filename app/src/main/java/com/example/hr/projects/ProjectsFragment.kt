@@ -6,11 +6,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hr.R
+import com.example.hr.databinding.FragmentHomeBinding
 import com.example.hr.databinding.FragmentProjectsBinding
+import com.example.hr.helper.Constant
+import com.example.hr.helper.PreferencesHelper
 import com.example.hr.remote.ApiClient
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -18,61 +25,48 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancel
 
 
-class ProjectFragment : Fragment(), ProjectsContract.View {
+class ProjectFragment : Fragment() {
 
     private lateinit var binding: FragmentProjectsBinding
-    private lateinit var coroutineScope: CoroutineScope
-    private var presenter: ProjectsPresenter? = null
-
+    private lateinit var viewModels: ProjectViewModels
+    private lateinit var sharePref: PreferencesHelper
+    private lateinit var recycleProject: RecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        coroutineScope = CoroutineScope(Job() + Dispatchers.Main)
-        val service = ApiClient.getApiClient(this.requireContext())?.create(ProjectsApiService::class.java)
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_projects, container, false)
+        sharePref = PreferencesHelper(activity as AppCompatActivity)
 
-        binding.recyclerProject.adapter = ProjectsAdapter()
-        binding.recyclerProject.layoutManager = LinearLayoutManager(requireActivity(), RecyclerView.VERTICAL, false)
+        viewModels = ViewModelProvider(this).get(ProjectViewModels::class.java)
 
-        presenter = ProjectsPresenter(coroutineScope, service)
+        val service = ApiClient.getApiClient(activity as AppCompatActivity)?.create(ProjectsApiService::class.java)
+        if (service != null) {
+            viewModels.setProjectService(service)
+        }
+
+        recycleProject = binding.recyclerProject
+        recycleProject.adapter = ProjectsAdapter(arrayListOf(), object : ProjectsAdapter.OnClickViewListener {
+            override fun OnClick(id: String) {
+
+            }
+
+        })
+        recycleProject.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
+        viewModels.callApiProject()
+        subscribeLiveData()
+
         return binding.root
 
     }
 
-    override fun onStart() {
-        super.onStart()
-        presenter?.bindToView(this)
-        presenter?.callProjectApi()
-        Log.d("android1", "call project api on start")
+
+
+
+    private fun subscribeLiveData() {
+        viewModels.listLiveData.observe(viewLifecycleOwner, Observer {
+            (binding.recyclerProject.adapter as ProjectsAdapter).addList(it)
+        })
     }
-
-    override fun onStop() {
-        presenter?.unBind()
-        super.onStop()
-    }
-
-    override fun onDestroy() {
-        coroutineScope.cancel()
-        presenter = null
-        super.onDestroy()
-    }
-
-
-    override fun addListProject(list: List<ProjectsModel>) {
-
-        (binding.recyclerProject.adapter as ProjectsAdapter).addList(list)
-
-    }
-
-    override fun showProgressBar() {
-        binding.progressbar.visibility = View.VISIBLE
-    }
-
-    override fun hideProgressBar() {
-        binding.progressbar.visibility = View.GONE
-    }
-
 }

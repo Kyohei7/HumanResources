@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hr.R
 import com.example.hr.databinding.FragmentHomeBinding
+import com.example.hr.helper.PreferencesHelper
 import com.example.hr.remote.ApiClient
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -37,7 +38,7 @@ class HomeFragment : Fragment(), DevelopersContract.View {
         binding.recyclerHome.layoutManager  = LinearLayoutManager(requireActivity(), RecyclerView.VERTICAL, false)
 
 
-        presenter = DevelopersPresenter(coroutineScope, service)
+        presenter = DevelopersPresenter(coroutineScope, service, sharePref = PreferencesHelper(requireContext()))
         return binding.root
     }
 
@@ -45,6 +46,7 @@ class HomeFragment : Fragment(), DevelopersContract.View {
         super.onStart()
         presenter?.bindToView(this)
         presenter?.CallDeveloperApi()
+        presenter?.callCompanyId(id.toString())
         Log.d("android1", "call developer api on start")
     }
 
