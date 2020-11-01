@@ -1,11 +1,9 @@
-package com.example.hr.projects
+package com.example.hr.projects.details
 
 
 import com.google.gson.annotations.SerializedName
 
 data class Data(
-    @SerializedName("count")
-    val count: Int,
     @SerializedName("createAt")
     val createAt: String,
     @SerializedName("deadline")
@@ -15,9 +13,7 @@ data class Data(
     @SerializedName("id_company")
     val idCompany: Int,
     @SerializedName("id_project")
-    val idProject: String,
-    @SerializedName("name_company")
-    val nameCompany: String,
+    val idProject: Int,
     @SerializedName("name_project")
     val nameProject: String,
     @SerializedName("photo")

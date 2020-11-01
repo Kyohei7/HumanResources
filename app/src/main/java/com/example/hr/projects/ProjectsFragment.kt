@@ -1,5 +1,6 @@
 package com.example.hr.projects
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -18,6 +19,7 @@ import com.example.hr.databinding.FragmentHomeBinding
 import com.example.hr.databinding.FragmentProjectsBinding
 import com.example.hr.helper.Constant
 import com.example.hr.helper.PreferencesHelper
+import com.example.hr.projects.details.DetailsProjectActivity
 import com.example.hr.remote.ApiClient
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -37,35 +39,38 @@ class ProjectFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_projects, container, false)
-        sharePref = PreferencesHelper(activity as AppCompatActivity)
-
-        viewModels = ViewModelProvider(this).get(ProjectViewModels::class.java)
+        sharePref = PreferencesHelper(requireContext())
 
         val service = ApiClient.getApiClient(activity as AppCompatActivity)?.create(ProjectsApiService::class.java)
+
+        viewModels = ViewModelProvider(this).get(ProjectViewModels::class.java)
+        viewModels.setSharePref(sharePref)
+
         if (service != null) {
             viewModels.setProjectService(service)
         }
 
         recycleProject = binding.recyclerProject
-        recycleProject.adapter = ProjectsAdapter(arrayListOf(), object : ProjectsAdapter.OnClickViewListener {
-            override fun OnClick(id: String) {
-
+        recycleProject.adapter = ProjectsAdapter(arrayListOf(), object : ProjectsAdapter.onAdapterListener {
+            override fun OnClick(project: ProjectsModel) {
+                sharePref.putString(Constant.PREFERENCE_IS_PROJECT, project.id)
+                startActivity(Intent(requireContext(), DetailsProjectActivity::class.java))
             }
-
         })
         recycleProject.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
-        viewModels.callApiProject()
+        viewModels.getProjectByidCompany()
         subscribeLiveData()
-
         return binding.root
 
     }
 
-
-
+    override fun onResume() {
+        super.onResume()
+        viewModels.getProjectByidCompany()
+    }
 
     private fun subscribeLiveData() {
-        viewModels.listLiveData.observe(viewLifecycleOwner, Observer {
+        viewModels.isProjectResponse.observe(viewLifecycleOwner, Observer {
             (binding.recyclerProject.adapter as ProjectsAdapter).addList(it)
         })
     }

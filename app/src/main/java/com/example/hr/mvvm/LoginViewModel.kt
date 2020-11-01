@@ -1,6 +1,7 @@
 package com.example.hr.mvvm
 
 import android.content.SharedPreferences
+import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -53,7 +54,8 @@ class LoginViewModel : ViewModel(), CoroutineScope {
                 if (response.data?.role == "company") {
                     sharedPreferences.putString(Constant.PREFERENCES_IS_TOKEN, response.data.token)
                     sharedPreferences.putBoolean(Constant.PREFERENCES_IS_LOGIN, true)
-                    sharedPreferences.putString(Constant.PREFERENCES_ID, response.data.id)
+                    var a = sharedPreferences.putString(Constant.PREFERENCES_ID, response.data.id).toString()
+                    Log.d("SharePref", "${a}")
                     sharedPreferences.putString(Constant.PREFERENCES_IS_USERNAME, response.data.name)
                     isLoginLiveData.value = true
 

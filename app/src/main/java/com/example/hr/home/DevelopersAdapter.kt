@@ -1,44 +1,45 @@
 package com.example.hr.home
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hr.R
-import com.example.hr.databinding.ItemCardDeveloperBinding
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.item_card_developer.view.*
 
-class DevelopersAdapter: RecyclerView.Adapter<DevelopersAdapter.DeveloperHolder>() {
-
-
-    private val items = mutableListOf<DevelopersModel>()
-
-    private fun getPhotoImage(file: String) : String = "http://18.234.106.45:8080/uploads/$file"
-
-    fun addList(list: List<DevelopersModel>) {
-        items.clear()
-        items.addAll(list)
-        notifyDataSetChanged()
-    }
+class DevelopersAdapter(val dataDev: ArrayList<DevelopersModel>, val listener: OnAdapterListener): RecyclerView.Adapter<DevelopersAdapter.DeveloperHolder>() {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): DevelopersAdapter.DeveloperHolder {
-        return DeveloperHolder(DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_card_developer, parent, false))
+        return DeveloperHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_card_developer, parent, false))
     }
 
-    override fun getItemCount(): Int = items.size
+    override fun getItemCount(): Int = dataDev.size
 
     override fun onBindViewHolder(holder: DeveloperHolder, position: Int) {
-        val item = items[position]
-        holder.binding.tvNameDeveloper.text = item.name
-        holder.binding.tvJobDeveloper.text = item.job
-        Picasso.get().load(getPhotoImage(item.photo.toString())).
-            into(holder.binding.imgImageDeveloper)
-
+        val developer = dataDev[position]
+        Picasso.get().load("http://18.234.106.45:8080/uploads/" + developer.photo).into(holder.view.img_image_developer)
+        holder.view.tv_name_developer.text = developer.name
+        holder.view.tv_job_developer.text = developer.job
+        holder.view.img_image_developer.setOnClickListener {
+            listener.OnClick(developer)
+        }
     }
 
-    class DeveloperHolder(val binding: ItemCardDeveloperBinding): RecyclerView.ViewHolder(binding.root)
+    class DeveloperHolder(val view: View): RecyclerView.ViewHolder(view)
+
+    fun addList(newList: List<DevelopersModel>) {
+        dataDev.clear()
+        dataDev.addAll(newList)
+        notifyDataSetChanged()
+    }
+
+
+    interface OnAdapterListener {
+        fun OnClick(developer: DevelopersModel)
+    }
 
 }

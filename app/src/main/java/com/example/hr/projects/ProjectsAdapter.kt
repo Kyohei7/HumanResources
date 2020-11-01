@@ -1,6 +1,7 @@
 package com.example.hr.projects
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -9,15 +10,13 @@ import com.example.hr.databinding.ItemCardDeveloperBinding
 import com.example.hr.databinding.ItemCardProjectBinding
 import com.example.hr.helper.PreferencesHelper
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.item_card_project.view.*
 
-class ProjectsAdapter(val items: ArrayList<ProjectsModel>, val listener: OnClickViewListener): RecyclerView.Adapter<ProjectsAdapter.ProjectHolder>() {
-
-    private lateinit var sharePref: PreferencesHelper
-    private fun getPhotoImage(file: String) : String = "http://18.234.106.45:8080/uploads/$file"
+class ProjectsAdapter(val dataProject: ArrayList<ProjectsModel>, val listener: onAdapterListener): RecyclerView.Adapter<ProjectsAdapter.ProjectHolder>() {
 
     fun addList(list: List<ProjectsModel>) {
-        items.clear()
-        items.addAll(list)
+        dataProject.clear()
+        dataProject.addAll(list)
         notifyDataSetChanged()
     }
 
@@ -25,25 +24,26 @@ class ProjectsAdapter(val items: ArrayList<ProjectsModel>, val listener: OnClick
         parent: ViewGroup,
         viewType: Int
     ): ProjectsAdapter.ProjectHolder {
-        return ProjectHolder(DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_card_project, parent, false))
+        return ProjectHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_card_project, parent, false
+        ))
     }
 
-    override fun getItemCount(): Int = items.size
+    override fun getItemCount(): Int = dataProject.size
 
     override fun onBindViewHolder(holder: ProjectsAdapter.ProjectHolder, position: Int) {
-        val item = items[position]
-        holder.binding.tvNameProject.text = item.name_project
-        holder.binding.tvJobDeadline.text = item.deadline
-        Picasso.get().load(getPhotoImage(item.photo.toString())).
-        into(holder.binding.imgImageProject)
-        holder.binding.rvProjects.setOnClickListener {
-            listener.OnClick(item.id)
+        val project = dataProject[position]
+        holder.view.tv_name_project.text = project.name_project
+        holder.view.tv_job_deadline.text = project.deadline
+        Picasso.get().load("http://18.234.106.45:8080/uploads" + project.photo)
+            .into(holder.view.img_image_project)
+        holder.itemView.setOnClickListener {
+            listener.OnClick(project)
         }
     }
 
-    class ProjectHolder(val binding: ItemCardProjectBinding): RecyclerView.ViewHolder(binding.root)
+    class ProjectHolder(val view: View): RecyclerView.ViewHolder(view)
 
-    interface OnClickViewListener {
-        fun OnClick(id: String)
+    interface onAdapterListener {
+        fun OnClick(project: ProjectsModel)
     }
 }

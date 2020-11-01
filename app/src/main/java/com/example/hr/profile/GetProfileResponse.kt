@@ -3,7 +3,7 @@ package com.example.hr.profile
 
 import com.google.gson.annotations.SerializedName
 
-data class CompanyByIdUserResponse(
+data class GetProfileResponse(
     @SerializedName("data")
     val `data`: Data,
     @SerializedName("message")

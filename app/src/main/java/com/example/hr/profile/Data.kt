@@ -13,7 +13,7 @@ data class Data(
     @SerializedName("email")
     val email: String,
     @SerializedName("id_company")
-    val idCompany: Int,
+    val idCompany: String,
     @SerializedName("id_user")
     val idUser: Int,
     @SerializedName("instagram")
