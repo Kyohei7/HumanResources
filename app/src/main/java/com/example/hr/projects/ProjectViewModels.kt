@@ -14,6 +14,7 @@ import kotlin.coroutines.CoroutineContext
 class ProjectViewModels: ViewModel() {
 
     val isProjectResponse = MutableLiveData<List<ProjectsModel>>()
+    val isDeleteProject = MutableLiveData<Void>()
     private lateinit var service: ProjectsApiService
     private lateinit var sharePref : PreferencesHelper
 
@@ -45,6 +46,19 @@ class ProjectViewModels: ViewModel() {
                     )
                 } ?: listOf()
                 isProjectResponse.value = list
+            }
+
+        })
+    }
+
+    fun delete(id: String) {
+        service?.deleteProject(id)?.enqueue(object : Callback<Void> {
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+
+            }
+
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                isDeleteProject.value = response.body()
             }
 
         })

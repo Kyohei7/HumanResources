@@ -26,7 +26,7 @@ class DetailsProjectViewModel: ViewModel() {
         val id = sharePref.getString(Constant.PREFERENCE_IS_PROJECT)
         service.getDetailsProject(id).enqueue(object : Callback<DetailsProjectResponse> {
             override fun onFailure(call: Call<DetailsProjectResponse>, t: Throwable) {
-                TODO("Not yet implemented")
+
             }
 
             override fun onResponse(

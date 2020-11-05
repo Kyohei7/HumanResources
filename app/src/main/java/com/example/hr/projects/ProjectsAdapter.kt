@@ -36,14 +36,26 @@ class ProjectsAdapter(val dataProject: ArrayList<ProjectsModel>, val listener: o
         holder.view.tv_job_deadline.text = project.deadline
         Picasso.get().load("http://18.234.106.45:8080/uploads" + project.photo)
             .into(holder.view.img_image_project)
+
         holder.itemView.setOnClickListener {
             listener.OnClick(project)
         }
+
+        holder.view.edit.setOnClickListener {
+            listener.onUpdate(project)
+        }
+
+        holder.view.delete.setOnClickListener {
+            listener.onDelete(project)
+        }
+
     }
 
     class ProjectHolder(val view: View): RecyclerView.ViewHolder(view)
 
     interface onAdapterListener {
         fun OnClick(project: ProjectsModel)
+        fun onUpdate(project: ProjectsModel)
+        fun onDelete(project: ProjectsModel)
     }
 }
